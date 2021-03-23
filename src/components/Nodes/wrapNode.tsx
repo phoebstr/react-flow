@@ -59,6 +59,9 @@ export default (NodeComponent: ComponentType<NodeComponentProps>) => {
       }),
       [selected, xPos, yPos, isSelectable, isDraggable, onClick, isInitialized, style]
     );
+
+    console.log(nodeStyle);
+
     const onMouseEnterHandler = useMemo(() => {
       if (!onMouseEnter || isDragging) {
         return;
@@ -170,9 +173,12 @@ export default (NodeComponent: ComponentType<NodeComponentProps>) => {
       [node, isSelectable, selectNodesOnDrag, onClick, onNodeDragStop, isDragging, selected]
     );
 
-    const onNodeDoubleClickHandler = useCallback((event: MouseEvent) => {
-      onNodeDoubleClick?.(event, node)
-    }, [node, onNodeDoubleClick])
+    const onNodeDoubleClickHandler = useCallback(
+      (event: MouseEvent) => {
+        onNodeDoubleClick?.(event, node);
+      },
+      [node, onNodeDoubleClick]
+    );
 
     useEffect(() => {
       if (nodeElement.current && !isHidden) {
@@ -219,7 +225,7 @@ export default (NodeComponent: ComponentType<NodeComponentProps>) => {
         <div
           className={nodeClasses}
           ref={nodeElement}
-          style={nodeStyle}
+          // style={nodeStyle}
           onMouseEnter={onMouseEnterHandler}
           onMouseMove={onMouseMoveHandler}
           onMouseLeave={onMouseLeaveHandler}
